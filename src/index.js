@@ -1,35 +1,36 @@
-import { createStore } from 'redux';
+import { createStore } from "redux";
 
+console.log("-------- START OF APP --------");
 let initialState = {
-  contacts: []
+  contacts: [],
 };
 
-let contactReducer = function(state = initialState, action) {
+let contactReducer = function (state = initialState, action) {
   console.log(`contactReducer: state is:`, state, `, action is:`, action);
 
   switch (action.type) {
-    case 'ADD_CONTACT':
+    case "ADD_CONTACT":
       return {
         ...state,
-        contacts: [...state.contacts, action.contact]
+        contacts: [...state.contacts, action.contact],
       };
   }
-}
+};
 
 let store = createStore(contactReducer);
 
-console.log('store:', store);
+console.log("store:", store);
 
 store.subscribe(() => {
-	console.log('SUBSCRIBER:', store.getState().contacts);
+  console.log("SUBSCRIBER:", store.getState().contacts);
 });
 
 store.dispatch({
-  type: 'ADD_CONTACT',
+  type: "ADD_CONTACT",
   contact: {
-    name: 'Peter',
-    address: 'Ireland'
-  }
-})
+    name: "Peter",
+    address: "Ireland",
+  },
+});
 
 console.log(`store state:`, store.getState());
